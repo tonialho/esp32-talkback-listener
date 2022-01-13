@@ -24,6 +24,7 @@ String talkbackURL = TALKBACK_URL;
 
 String checker;
 bool completion = false;
+int buzzerPin = 13;
 
 void setup()
 {
@@ -51,6 +52,9 @@ void setup()
 
     // Set the ESP32 on-board led pin to output mode
     pinMode(2, OUTPUT);
+
+    // Buzzer not working atm
+    pinMode(buzzerPin, OUTPUT);
 }
 
 
@@ -63,7 +67,7 @@ void loop()
   // The delay should be set according to the time TalkBack value "true" is reseted back to "false"
   if(completion == true) {
     Serial.println("On cooldown");
-    delay (30000);
+    delay (150000);
     completion = false;
   }
 
@@ -102,11 +106,8 @@ void loop()
     if(checker == "true") {
       Serial.println("CONGRATSZZZZZZZZZ!!!!");
 
-      // For debuggind purposes, just blink the built-in led
-      digitalWrite(2, HIGH);
-      delay(1000);
-      digitalWrite(2, LOW);    
-      delay(1000);  
+      // For debuggind purposes, just blink the built-in led      
+      blink();
 
       completion = true;
     }
@@ -127,4 +128,38 @@ void loop()
 
   // Delay for the loop, affects on how quick the response to the change of Talkback value is
   delay(2000);
+}
+
+
+void blink() {
+  digitalWrite(2, HIGH);
+  delay(300);
+  digitalWrite(2, LOW);    
+  delay(300);  
+  digitalWrite(2, HIGH);
+  delay(300);
+  digitalWrite(2, LOW);    
+  delay(300);  
+  digitalWrite(2, HIGH);
+  delay(300);
+  digitalWrite(2, LOW);    
+  delay(300);    
+  digitalWrite(2, HIGH);
+  delay(300);
+  digitalWrite(2, LOW);    
+  delay(300);  
+  digitalWrite(2, HIGH);
+  delay(300);
+  digitalWrite(2, LOW);    
+  delay(300);
+
+  // Buzzer not working atm
+  digitalWrite(buzzerPin, HIGH);
+  delay(300);
+  digitalWrite(buzzerPin, LOW);    
+  delay(300);
+  digitalWrite(buzzerPin, HIGH);
+  delay(300);
+  digitalWrite(buzzerPin, LOW);    
+  delay(300);
 }
